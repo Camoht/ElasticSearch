@@ -1,0 +1,60 @@
+services:
+
+  # ── Service Elasticsearch ──
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node            # Nœud unique (pas de cluster).
+      - xpack.security.enabled=false          # Sécurité désactivée pour le dev.
+      - xpack.security.http.ssl.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"      # Limite mémoire JVM (chapitre 4.3).
+    ports:
+      - "9200:9200"                           # API REST Elasticsearch.
+    volumes:
+      - es-data:/usr/share/elasticsearch/data # Persistance des données.
+    networks:
+      - elastic
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s http://localhost:9200 | grep -q 'cluster_name'"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ── Service Kibana ──
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.13.0
+    container_name: kibana
+    ports:
+      - "5601:5601"                           # Interface web Kibana.
+    environment:
+      # Nom du service Docker, pas "localhost" (chapitre 4.3).
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - elastic
+
+# Volume nommé pour la persistance des données (chapitre 3.2).
+volumes:
+  es-data:
+    driver: local
+
+# Réseau dédié pour la communication inter-services (chapitre 4.3).
+networks:
+  elastic:
+    driver: bridge
+
+# ─────────────────────────────────────────────────────────────
+# Commandes :
+#   Démarrer les services :         docker compose up -d
+#   Vérifier qu'ES est prêt :       curl http://localhost:9200
+#   Accéder à Kibana :              http://localhost:5601
+#   Voir les logs :                 docker compose logs -f
+#   Voir l'état des services :      docker compose ps
+#   Redémarrer les services :       docker compose restart
+#   Arrêter (données conservées) :  docker compose down
+#   Arrêter + supprimer données :   docker compose down -v
+# ─────────────────────────────────────────────────────────────
