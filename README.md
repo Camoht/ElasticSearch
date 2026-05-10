@@ -22,4 +22,4 @@ Reconstrisez votre ElasticSearch, executez dans l'ordre :
 3.b. ```docker compose exec streamlit python src/indexer.py```
 
 # Bon à savoir
-Un rapport présentant le projet est disponible ```/cinesearch-streamlit/doc/Projet_ElasticSearch.docx```
+Un rapport présentant le projet est disponible ```/cinesearch-streamlit/doc/Rapport.pdf```
