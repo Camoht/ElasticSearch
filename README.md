@@ -23,3 +23,4 @@ Reconstrisez votre ElasticSearch, executez dans l'ordre :
 
 # Bon à savoir
 Un rapport présentant le projet est disponible ```/cinesearch-streamlit/doc/Rapport.pdf```
+Une démo est aussi disponible ```/cinesearch-streamlit/doc/Demo.mp4```
