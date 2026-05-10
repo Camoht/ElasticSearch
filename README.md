@@ -1,3 +1,6 @@
+# Configuration
+Il vous faut un accès à docker et savoir executer des commandes sur votre terminal.
+
 # Démarrage
 1. Démarrez l'outil et ses dépendances :
 1.a. Sur Linux : ```./start.sh```
@@ -17,3 +20,6 @@ Supprimez vos images docker non utilisées, executez dans l'ordre :
 Reconstrisez votre ElasticSearch, executez dans l'ordre :
 3.a. ```docker compose exec streamlit python src/config.py```
 3.b. ```docker compose exec streamlit python src/indexer.py```
+
+# Bon à savoir
+Un rapport présentant le projet est disponible ```/cinesearch-streamlit/doc/Projet_ElasticSearch.docx```
