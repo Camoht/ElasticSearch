@@ -1,3 +1,19 @@
-# Sur Linux :
+# Démarrage
+1. Démarrez l'outil et ses dépendances :
+1.a. Sur Linux : ```./start.sh```
+1.b. Sur Windows : double-cliquez sur ```start.bat```
 
-1. ./start.sh
+Deux onglets se sont ouverts dans votre navigateur par défaut. Manipuler l'outil via http://localhost:8501/ (premier onglet ouvert).
+
+## Dépannages
+**Les onglets ne s'ouvrent pas**
+Supprimez vos images docker non utilisées, executez dans l'ordre :
+1. ```docker compose down -v```
+2. ```docker compose down -v --remove-orphans``` 
+3. ```docker compose up -d --build```
+4. ```./start.sh```
+
+**Messages d'erreurs dans l'outil**
+Reconstrisez votre ElasticSearch, executez dans l'ordre :
+3.a. ```docker compose exec streamlit python src/config.py```
+3.b. ```docker compose exec streamlit python src/indexer.py```
