@@ -2,11 +2,9 @@
 Il vous faut un accès à docker et savoir executer des commandes sur votre terminal.
 
 # Démarrage
-1. Démarrez l'outil et ses dépendances :
-
-1.a. Sur Linux : ```./start.sh```
-
-1.b. Sur Windows : double-cliquez sur ```start.bat```
+Démarrez l'outil et ses dépendances :
+A. Sur Linux : ```./start.sh```
+B. Sur Windows : double-cliquez sur ```start.bat```
 
 Deux onglets se sont ouverts dans votre navigateur par défaut. Manipuler l'outil via http://localhost:8501/ (premier onglet ouvert).
 
